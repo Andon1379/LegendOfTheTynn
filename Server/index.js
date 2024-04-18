@@ -106,6 +106,7 @@ app.get("/:id", (req, res)=>{
   
   var id = req.params['id'];
   console.log(id)
+  if(id == null) {res.end()} 
   toSend = {};
 
   if(threads[id].timeStamp - Date.now() <= 0) {
@@ -115,7 +116,7 @@ app.get("/:id", (req, res)=>{
     })
     res.send(tmpThread);
   }
-  res.send();
+  res.end();
 });
 
 app.post('/verify', (req, res) => {
