@@ -18,7 +18,7 @@ class Thread {
     this.title = title;
     this.content = content;
     this.passhash = hashCode(password);
-    this.destination = "/forum_template/Forum_Template.html"
+    this.destination = "/forum_template/ForumThread.html"
 
     this.children = [];
   }
@@ -45,6 +45,7 @@ class Post {
 
 
 var hashCode = function(s) {
+  console.log(s)
   var h = 0, l = s.length, i = 0;
   if ( l > 0 )
     while (i < l)
@@ -65,8 +66,12 @@ app.use(express.json());
 port = 3000;
 
 threads = [];
-threads[0] = new Thread("ThreadOwner", Date.now()-100, "Post Title", "Post Contnet lol", "wmonp womp");
-threads[0].addChild(new Post("PostOwner", Date.now()-50, "Lorum Ipsum Sit Alor fdsjfalskdjf;lks whatever the fucking thing was"))
+threads[0] = new Thread("ThreadOwner", Date.now()-200, "Post Title", "Post Contnet lol", "password");
+threads[0].addChild(new Post("PostOwner", Date.now()-50, "Lorum Ipsum"))
+
+threads[1] = new Thread("ThreadOwner2", Date.now()-200, "post title 2", "electric boogaloo", "hello");
+threads[1].addChild(new Post("PostOwner1", Date.now()-50, "Child1"))
+threads[1].addChild(new Post("PostOwner2", Date.now()-50, "Child2"))
 
 
 // helper functions
@@ -86,7 +91,7 @@ app.get('/', (req, res) => {
     toSend = [];
     threads.forEach(thread => {
         if(thread.timeStamp - Date.now() <= 0) {
-            var tmpThread = new Thread(thread.threadOwner, thread.timeStamp, thread.title, thread.content, thread.password);
+            var tmpThread = new Thread(thread.threadOwner, thread.timeStamp, thread.title, thread.content, "");
             thread.children.forEach(e=>{
               if(e.timeStamp - Date.now() <= 0) {tmpThread.addChild(new Post(e.postAuthor, e.timeStamp, e.content))}
             })
@@ -97,10 +102,29 @@ app.get('/', (req, res) => {
     res.send(JSON.stringify(toSend));
 });
 
-app.get('/verify', (req, res) => {
-  threads.forEach(thread =>{
-    if(req.body.passhash == thread.passhash) {
-      res.send(thread.destination); 
+app.get("/:id", (req, res)=>{
+  
+  var id = req.params['id'];
+  console.log(id)
+  toSend = {};
+
+  if(threads[id].timeStamp - Date.now() <= 0) {
+    var tmpThread = new Thread(threads[id].threadOwner, threads[id].timeStamp, threads[id].title, threads[id].content, "");
+    threads[id].children.forEach(e=>{
+      if(e.timeStamp - Date.now() <= 0) {tmpThread.addChild(new Post(e.postAuthor, e.timeStamp, e.content))}
+    })
+    res.send(tmpThread);
+  }
+  res.send();
+});
+
+app.post('/verify', (req, res) => {
+  console.log(req.body)
+  threads.forEach((thread, index) =>{
+    if(req.body.passhash == thread.passhash && req.body.index == index) {
+      
+      res.send({index: index, destination: thread.destination}); 
+
     }
   });
    
