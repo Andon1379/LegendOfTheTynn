@@ -95,13 +95,13 @@ const timeLog = (req, res, next) => {
     var curTime = new Date();
     let curMin = (curTime.getHours()*60)+curTime.getMinutes();
     console.log(`[${(curMin - (curMin % 60) )/ 60}:${curMin%60}]: ${req.method} at ${req.originalUrl}`);
-    console.log(`req.params: ${req.params.JSON()}`);
+    console.log(`req.params: ${req.params}`);
     next()
 }
 
 
 
-function parseDate(day) { // for hangmangle passwords. day should be in dd-mm-yyyy format
+function parseDate(day) { // for hangmangle passwords. day should be in dd-mm-yyyy format (w/ or w/o leading 0s)
   day = day.split('-');
   day = Date.parse(`${day[0]} ${day[1]} ${day[2]}`) - Date.parse("22 Apr 2024") // monday
   day = Math.round(day / (1000 * 3600 * 24)) - 1 // normalize for index
