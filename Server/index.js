@@ -95,14 +95,14 @@ const timeLog = (req, res, next) => {
     var curTime = new Date();
     let curMin = (curTime.getHours()*60)+curTime.getMinutes();
     console.log(`[${(curMin - (curMin % 60) )/ 60}:${curMin%60}]: ${req.method} at ${req.originalUrl}`);
-    console.log(`req.params: ${req.params}`);
+    console.log(`req.params: ${JSON.stringify(req.params)}`);
     next()
 }
 
 
 
 function parseDate(day) { // for hangmangle passwords. day should be in dd-mm-yyyy format (w/ or w/o leading 0s)
-  day = day.split('-');
+  day = day.split('_');
   day = Date.parse(`${day[0]} ${day[1]} ${day[2]}`) - Date.parse("22 Apr 2024") // monday
   day = Math.round(day / (1000 * 3600 * 24)) - 1 // normalize for index
 
@@ -186,9 +186,10 @@ app.get('hangmanle/positions/:key/:day', (req, res) =>{
 });
 
 app.get('hangmanle/length/:day', (req, res) =>{
+  console.log(true);
   var day = req.params['day'];
+  console.log(hangmanglePasswords[parseDate(day)].length);
   res.send(hangmanglePasswords[parseDate(day)].length);
-  // this shouldn't have issues? 
 });
 
 app.listen(port, () => {
