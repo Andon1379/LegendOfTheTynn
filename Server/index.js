@@ -65,6 +65,8 @@ app.use(express.json());
 
 port = 3000;
 
+// this should be in a json file
+// we don't care about case!
 threads = [];
 threads[0] = new Thread("ThreadOwner", Date.now()-200, "Post Title", "Post Contnet lol", "password");
 threads[0].addChild(new Post("PostOwner", Date.now()-50, "Lorum Ipsum"))
@@ -73,19 +75,47 @@ threads[1] = new Thread("ThreadOwner2", Date.now()-200, "post title 2", "electri
 threads[1].addChild(new Post("PostOwner1", Date.now()-50, "Child1"))
 threads[1].addChild(new Post("PostOwner2", Date.now()-50, "Child2"))
 
+threads[2] = new Thread("ThreadOwner3", Date.now()+200, "post title 2", "electric boogaloo", "hello");
+threads[2].addChild(new Post("PostOwner1", Date.now()+50, "Child1"))
+threads[2].addChild(new Post("PostOwner2", Date.now()+50, "Child2"))
+
+
+
+darkPage = { pass:"creature", destination:"dark_home.html", timeStamp:Date.parse("23 Apr 2024 15:30:00")};
+// TODO: add link from fake homepage to forum 
+
+// forum needs to be accessible monday, 
+// real homepage needs to be acessible tuesday  
+
+hangmanglePasswords = ["party","nabo","tamhlvf", "oetaqgctsqp", "sttwfjmfjzxzcbvwcye"];
+
 
 // helper functions
 const timeLog = (req, res, next) => {
     var curTime = new Date();
     let curMin = (curTime.getHours()*60)+curTime.getMinutes();
     console.log(`[${(curMin - (curMin % 60) )/ 60}:${curMin%60}]: ${req.method} at ${req.originalUrl}`);
+    console.log(`req.params: ${req.params.JSON()}`);
     next()
 }
+
+
+
+function parseDate(day) { // for hangmangle passwords. day should be in dd-mm-yyyy format
+  day = day.split('-');
+  day = Date.parse(`${day[0]} ${day[1]} ${day[2]}`) - Date.parse("22 Apr 2024") // monday
+  day = Math.round(day / (1000 * 3600 * 24)) - 1 // normalize for index
+
+  if(day < 0) {day = 0} else if (day > 4) {day = 4}
+  return day  
+}
+
+
 
 app.use(timeLog)
 app.use('/pages', express.static('pages'));
 
-app.get('/', (req, res) => {
+app.get('/forum', (req, res) => {
     // console.log("");
     console.log(req.params);
     toSend = [];
@@ -102,7 +132,7 @@ app.get('/', (req, res) => {
     res.send(JSON.stringify(toSend));
 });
 
-app.get("/:id", (req, res)=>{
+app.get("/forum/id/:id", (req, res)=>{
   
   var id = req.params['id'];
   console.log(id)
@@ -119,10 +149,10 @@ app.get("/:id", (req, res)=>{
   res.end();
 });
 
-app.post('/verify', (req, res) => {
+app.post('/forum/verify', (req, res) => {
   console.log(req.body)
   threads.forEach((thread, index) =>{
-    if(req.body.passhash == thread.passhash && req.body.index == index) {
+    if(req.body.passhash.toLowerCase() == thread.passhash && req.body.index == index) {
       
       res.send({index: index, destination: thread.destination}); 
 
@@ -131,6 +161,35 @@ app.post('/verify', (req, res) => {
    
 })
 
+
+app.post('/mainPage/:pass', (req, res) => {
+  if(req.pass.toLowerCase() == darkPage.pass && Date.now() - darkPage.timeStamp >= 0) {
+    res.send(darkPage.destination)
+  } else {res.end()}
+}); 
+
+
+app.get('hangmanle/positions/:key/:day', (req, res) =>{
+  console.log(`key: ${req.params['key']}, day: ${req.params['day']}`); // day needs to be in the format dd-mm-year (cant use whitespaces)
+  
+  var key = req.params['key'].charAt(0);
+  var day = req.params['day'];
+
+  var pass = hangmanglePasswords[parseDate(day)]
+
+  pass.split("").map((ele, ind)=>{ if(ele==key){return ind} else {return -1}})
+  pass.filter((ele => ele >= 0))
+
+  console.log(`returning: ${pass}`)
+  res.send(pass)
+
+});
+
+app.get('hangmanle/length/:day', (req, res) =>{
+  var day = req.params['day'];
+  res.send(hangmanglePasswords[parseDate(day)].length);
+  // this shouldn't have issues? 
+});
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
