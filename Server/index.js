@@ -103,11 +103,17 @@ const timeLog = (req, res, next) => {
 
 function parseDate(day) { // for hangmangle passwords. day should be in dd-mm-yyyy format (w/ or w/o leading 0s)
   day = day.split('_');
-  day = Date.parse(`${day[0]} ${day[1]} ${day[2]}`) - Date.parse("22 Apr 2024") // monday
+  day = Date.parse(`${day[2]}-${day[1]}-${day[0]}`) - Date.parse("22 Apr 2024") // monday
+  
+  // prevent players from getting past today
+  today = new Date()
+  today = Date.parse(`${today.getFullYear()}-${today.getMonth()}-${today.getDate()}`)
+  day = Math.min(day, today)
   day = Math.round(day / (1000 * 3600 * 24)) - 1 // normalize for index
-
+  
   if(day < 0) {day = 0} else if (day > 4) {day = 4}
-  return day  
+  console.log(day);
+  return day  	
 }
 
 
@@ -169,7 +175,7 @@ app.post('/mainPage/:pass', (req, res) => {
 }); 
 
 
-app.get('hangmanle/positions/:key/:day', (req, res) =>{
+app.get('/hangmanle/positions/:key/:day', (req, res) =>{
   console.log(`key: ${req.params['key']}, day: ${req.params['day']}`); // day needs to be in the format dd-mm-year (cant use whitespaces)
   
   var key = req.params['key'].charAt(0);
@@ -177,20 +183,37 @@ app.get('hangmanle/positions/:key/:day', (req, res) =>{
 
   var pass = hangmanglePasswords[parseDate(day)]
 
-  pass.split("").map((ele, ind)=>{ if(ele==key){return ind} else {return -1}})
-  pass.filter((ele => ele >= 0))
+  pass = pass.split("").map((ele, ind)=>{ if(ele==key){return ind} else {return -1}})
+  pass = pass.filter((ele) => ele >= 0);
 
   console.log(`returning: ${pass}`)
-  res.send(pass)
+  res.send({positions:pass})
 
 });
 
-app.get('hangmanle/length/:day', (req, res) =>{
-  console.log(true);
+app.get('/hangmanle/length/:day', (req, res) =>{
   var day = req.params['day'];
-  console.log(hangmanglePasswords[parseDate(day)].length);
-  res.send(hangmanglePasswords[parseDate(day)].length);
+  //console.log(hangmanglePasswords[parseDate(day)].length);
+  res.send({length:hangmanglePasswords[parseDate(day)].length});
 });
+
+app.get('/hangmanle/canNext/:day',(req, res) => {
+  console.log("accessed next")
+  var day = req.params["day"];
+  day = day.split('_');
+  day = Date.parse(`${day[2]}-${day[1]}-${day[0]}`) - Date.parse("22 Apr 2024")
+  
+  var today = new Date()
+  today = Date.parse(`${today.getFullYear()}-${today.getMonth()}-${today.getDate()}`)
+  
+  resp = {next:false, prev:false}
+  
+  if(day < 0 ) {resp.next = true; resp.prev = false;}  
+  else if(day > today) {resp.next = false; resp.prev = true;}
+  else if(day === 0) {resp.next = false; resp.prev = false;}
+  res.send(resp);
+  
+})
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
