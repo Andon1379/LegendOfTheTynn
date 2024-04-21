@@ -111,7 +111,7 @@ threads[0].addChild(new Post("Diedre Everly",     Date.parse("2024-04-21T03:01:0
 threads[0].addChild(new Post("Rajkumari Carlyle", Date.parse("2024-04-21T03:02:00"), "Nah"));
 threads[0].addChild(new Post("Neil Falk",         Date.parse("2024-04-21T08:30:00"), "Greetings, everyone. Bit of a rough night, eh?"));
 threads[0].addChild(new Post("Ananta Dimov ",     Date.parse("2024-04-21T08:32:00"), "You could say that again. Tynn's at it again. If you believe Nikos, that is"));
-threads[0].addChild(new Post("Neil Falk",         Date.parse("2024-04-21T08:32:00"), "Neil Falk has left the Tynn Society Forum."));
+threads[0].addChild(new Post("Neil Falk",         Date.parse("2024-04-21T08:32:00"), "<style font-style: italic;>Neil Falk has left the Tynn Society Forum.</style>"));
 threads[0].addChild(new Post("Ananta Dimov",      Date.parse("2024-04-21T08:34:00"), "?"));
 threads[0].addChild(new Post("Chloe Havener",     Date.parse("2024-04-21T08:35:00"), "classic neil guys"));
 threads[0].addChild(new Post("Jim Tibbett",       Date.parse("2024-04-21T08:36:00"), "This seems like an accident. I certainly had no involvement in this."));
@@ -121,6 +121,70 @@ threads[0].addChild(new Post("Benedict Brutus",   Date.parse("2024-04-21T08:41:0
 threads[0].addChild(new Post("Diedre Everly",     Date.parse("2024-04-21T08:45:00"), "Yes, 32 and counting")); // you say this as if 32 is really old LOL 
 threads[0].addChild(new Post("Ananta Dimov",      Date.parse("2024-04-21T08:46:00"), "He's trying his best"));
 threads[0].addChild(new Post("Jim Tibbett",       Date.parse("2024-04-21T08:51:00"), "It was an accident. I'll add him back. Have a great day, everyone. And remember, the applications for new members begin tomorrow."));
+
+
+
+threads[1] = new Thread("Rajkumari Carlyle",      Date.parse("2024-04-21T01:49:00"), "I snuck over to Clark tn. No monsters here", "", "");
+threads[1].addChild(new Post("Chloe Havener",     Date.parse("2024-04-21T01:51:00"), "clark schmark that just makes it lamer"));
+threads[1].addChild(new Post("Nikos Shen",        Date.parse("2024-04-21T01:52:00"), "SMART idea Rajku. I Should just transfer out of here"));
+threads[1].addChild(new Post("Diedre Everly",     Date.parse("2024-04-21T01:55:00"), "I wouldn't think that, Nikos. What if it follows you?"));
+threads[1].addChild(new Post("Nikos Shen",        Date.parse("2024-04-21T01:56:00"), "Ughhhh you're right. It'll just find me agiain"));
+threads[1].addChild(new Post("Chloe Havener",     Date.parse("2024-04-21T01:58:00"), "i for one love our little freak and want to find him"));
+threads[1].addChild(new Post("Ananta Dimov",      Date.parse("2024-04-21T02:00:00"), "Oh, same. Want to hang tomorrow to search for clues"));
+threads[1].addChild(new Post("Benedict Brutus",   Date.parse("2024-04-21T02:10:00"), "Oooh… tough luck, Ananta"));
+threads[1].addChild(new Post("Ananta Dimov",      Date.parse("2024-04-21T02:11:00"), "I know, thanks"));
+threads[1].addChild(new Post("Jim Tibbett",       Date.parse("2024-04-21T08:15:00"), `Greetings, all. Today is the first day of new member applications. Welcome to all prospective new members. Applying is simple. We are expecting a lot of interest. Simply identify the name and retailer of our New Member's Beverage and imbibe it FULLY to apply. Do note that the beverage can only be ordered between the hours of 4 and 5 PM Eastern Standard, Tuesday through Friday.
+
+"THE TYNN SOCIETY'S ODE TO DUNKIN'"
+
+<b>I</b>t's <b>n</b>ot <b>t</b>he <b>l</b>ightest <b>o</b>nus <b>o</b>ne <b>c</b>ould <b>b</b>ear
+<b>t</b>o <b>s</b>pend <b>f</b>our <b>y</b>ears <b>a</b>t <b>w</b>orcester-P-I -- <b>w</b>here
+---
+<b>t</b>he <b>n</b>ever <b>e</b>nding <b>c</b>ourse-loads <b>a</b>re <b>r</b>elentless,
+<b>a</b>nd <b>n</b>o <b>r</b>espite <b>a</b>ppears <b>t</b>o <b>c</b>ircumvent <b>t</b>his,
+---
+<b>a</b>nd <b>u</b>ndead <b>s</b>tudents' <b>s</b>tupors <b>l</b>ast <b>b</b>etween
+<b>i</b>nfrequent, <b>f</b>leeting <b>h</b>ighs <b>f</b>rom <b>i</b>ced <b>c</b>affeine --
+---
+<b>i</b>ndeed, <b>w</b>e <b>h</b>ave <b>n</b>o <b>c</b>hoice <b>b</b>ut <b>c</b>ower <b>h</b>ere
+<b>w</b>here <b>f</b>orces (strange <b>o</b>r <b>c</b>ommon) <b>i</b>nvoke <b>f</b>ear.
+---
+<b>T</b>hat's <b>w</b>hy, <b>w</b>hen <b>f</b>acing <b>l</b>ong <b>n</b>adirs <b>a</b>nd <b>f</b>unks,
+<b>o</b>ur <b>T</b>YNN <b>S</b>OCIETY <b>a</b>lways <b>s</b>tops <b>a</b>t <b>D</b>UNKS!
+
+And your hint:
+
+3
+4
+---
+2
+2
+---
+2
+6
+---
+8
+6
+---
+6
+1
+
+Good luck, new members!
+
+And remember: the New Member's Beverage is to be ordered and imbibed Tuesday through Friday, 4 to 5 P.M. E.S.T. ONLY. Induction can only begin if the drink is finished in front of an employee. Following instructions is a valuable skill for any prospective Tynn Society member. For your own safety, attempt to minimize the number of sips or gulps taken when consuming the New Member's Beverage. Good luck!`));
+threads[1].addChild(new Post("Nikos Shen",        Date.parse("2024-04-21T11:12:00"), "LMAO this hangmanle makes no sense. Who wrote this???"));
+threads[1].addChild(new Post("Jim Tibbett",       Date.parse("2024-04-21T11:16:00"), "Nikos, we've told you how to solve these already. Does Vigenère ring a bell to you?"));
+threads[1].addChild(new Post("Ananta Dimov",      Date.parse("2024-04-21T11:20:00"), "Now that's my bread and butter. I wish I had a hangmanle like this."));
+threads[1].addChild(new Post("Neil Falk",         Date.parse("2024-04-21T13:04:00"), "reminder: add vinegar to gocery list Send Message."));
+threads[1].addChild(new Post("Chloe Havener",     Date.parse("2024-04-21T13:05:00"), "this isnt the notes app neil"));
+threads[1].addChild(new Post("Angelina Asmodeus", Date.parse("2024-04-21T15:33:00"), "wait i think im on the wrong website"));
+threads[1].addChild(new Post("Angelina Asmodeus", Date.parse("2024-04-21T15:33:00"), "<style font-style:italic;>Angelina Asmodeus left the Tynn Society Forum.</style>"));
+threads[1].addChild(new Post("Diedre Everly",     Date.parse("2024-04-21T15:35:00"), "Huh. That's odd"));
+threads[1].addChild(new Post("Chloe Havener",     Date.parse("2024-04-21T15:37:00"), "maybe she couldn't handle the heat"));
+threads[1].addChild(new Post("Rajkumari Carlyle", Date.parse("2024-04-21T15:37:00"), "Oh definitely"));
+threads[1].addChild(new Post("Jim Tibbett",       Date.parse("2024-04-21T15:38:00"), "Hmmm… whatever it is we must make sure they keep us a secret. Do your best to disseminate any leaks."));
+threads[1].addChild(new Post("Benedict Brutus",   Date.parse("2024-04-21T15:40:00"), "Not the first website I'd leak"));
+threads[1].addChild(new Post("Diedre Everly",     Date.parse("2024-04-21T15:41:00"), "Jim, I'll keep my ears open"));
 
 
 
