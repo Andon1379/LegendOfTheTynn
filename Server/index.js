@@ -230,7 +230,7 @@ darkPage = { pass:"creature", destination:"dark_home.html", timeStamp:Date.parse
 
 hangmanglePasswords = ["party","nabo","tamhlvf", "oetaqgctsqp", "sttwfjmfjzxzcbvwcye"];
 postPasses = [];
-postPasses[0] = new ThreadPass("ernst", "www.google.com")
+postPasses[0] = new ThreadPass("ernst", "https://www.google.com")
 
 // helper functions
 const timeLog = (req, res, next) => {
@@ -310,9 +310,9 @@ app.post('/forum/verify', (req, res) => {
 })
 
 app.post('/forum/pass', (req, res) => {
-  console.log(req.body)
+  // console.log(req.body)
   postPasses.forEach((post, index) => {
-    // console.log(post, req.body)
+    console.log(post, req.body)
     if((post.passHash == 0 || req.body.passHash == post.passHash) && req.body.index == index) {
       res.send({index:index, destination: post.destination});
     } else {res.end()}
