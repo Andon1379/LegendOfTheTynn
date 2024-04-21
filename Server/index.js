@@ -201,24 +201,24 @@ threads[2].addChild(new Post("Diedre Everly",     Date.parse("2024-04-21T15:41:0
 // Wednesday posts! 
 // TODO: ADD YOUTUBE LINK
 // TODO: add password too
-threads[3] = new Thread("Rajkumari Carlyle",      Date.parse("2024-04-21T08:15:00"), "Mornin, anything I missed?", "", "")
-threads[3].addChild(new Post("Benedict Brutus",   Date.parse("2024-04-21T21:52:00"), "check this out y'all: IMG_2231.mov"));
-threads[3].addChild(new Post("Ananta Dimov",      Date.parse("2024-04-21T21:52:00"), "I cant see the file"));
-threads[3].addChild(new Post("Jim Tibbett",       Date.parse("2024-04-21T21:53:00"), "Benedict, what did you mean to post?"));
-threads[3].addChild(new Post("Rajkumari Carlyle", Date.parse("2024-04-21T21:53:00"), "Ha, you're acting like Neil!"));
-threads[3].addChild(new Post("Neil Falk",         Date.parse("2024-04-21T21:53:00"), "Hey, I've got feelings too, and I am getting better at this."));
-threads[3].addChild(new Post("Benedict Brutus",   Date.parse("2024-04-21T21:53:00"), `check this out. the pw is the first name of our founder.<br>
+threads[3] = new Thread("Rajkumari Carlyle",      Date.parse("2024-04-20T08:15:00"), "Mornin, anything I missed?", "", "")
+threads[3].addChild(new Post("Benedict Brutus",   Date.parse("2024-04-20T21:52:00"), "check this out y'all: IMG_2231.mov"));
+threads[3].addChild(new Post("Ananta Dimov",      Date.parse("2024-04-20T21:52:00"), "I cant see the file"));
+threads[3].addChild(new Post("Jim Tibbett",       Date.parse("2024-04-20T21:53:00"), "Benedict, what did you mean to post?"));
+threads[3].addChild(new Post("Rajkumari Carlyle", Date.parse("2024-04-20T21:53:00"), "Ha, you're acting like Neil!"));
+threads[3].addChild(new Post("Neil Falk",         Date.parse("2024-04-20T21:53:00"), "Hey, I've got feelings too, and I am getting better at this."));
+threads[3].addChild(new Post("Benedict Brutus",   Date.parse("2024-04-20T21:53:00"), `check this out. the pw is the first name of our founder.<br>
 <div id="pwd-entry" style="display: flex; flex-direction: column; justify-content: space-evenly; align-items: center; width: 70%;">
   <input id="pwd-input${1}" type="text" placeholder="Password" style="font-size: 12px;">
   <button name="button" id="pwd-submit${1}" style="font-size: 12px;">Submit</button> 
 </div>`));
 
-threads[3].addChild(new Post("Chloe Havener",     Date.parse("2024-04-21T21:54:00"), "yesss it finally happened"));
-threads[3].addChild(new Post("Nikos Shen",        Date.parse("2024-04-21T21:55:00"), "WOAH is that real???"));
-threads[3].addChild(new Post("Rajkumari Carlyle", Date.parse("2024-04-21T21:55:00"), "As real as ever."));
-threads[3].addChild(new Post("Jim Tibbett",       Date.parse("2024-04-21T22:04:00"), "Everything is proceeding as planned. The Tynn will be satisfied with this."));
-threads[3].addChild(new Post("Benedict Brutus",   Date.parse("2024-04-21T22:10:00"), "this should be enough now right? we should be done for now?"));
-threads[3].addChild(new Post("Chloe Havener",     Date.parse("2024-04-21T22:12:00"), "be patient lol you said that last time"));
+threads[3].addChild(new Post("Chloe Havener",     Date.parse("2024-04-20T21:54:00"), "yesss it finally happened"));
+threads[3].addChild(new Post("Nikos Shen",        Date.parse("2024-04-20T21:55:00"), "WOAH is that real???"));
+threads[3].addChild(new Post("Rajkumari Carlyle", Date.parse("2024-04-20T21:55:00"), "As real as ever."));
+threads[3].addChild(new Post("Jim Tibbett",       Date.parse("2024-04-20T22:04:00"), "Everything is proceeding as planned. The Tynn will be satisfied with this."));
+threads[3].addChild(new Post("Benedict Brutus",   Date.parse("2024-04-20T22:10:00"), "this should be enough now right? we should be done for now?"));
+threads[3].addChild(new Post("Chloe Havener",     Date.parse("2024-04-20T22:12:00"), "be patient lol you said that last time"));
 
 
 
@@ -319,10 +319,12 @@ app.post('/forum/pass', (req, res) => {
 
 
 app.get('/mainPage/:pass', (req, res) => {
-  if(req.pass.toLowerCase() == darkPage.pass && Date.now() - darkPage.timeStamp >= 0) {
+  if(req.pass == darkPage.pass && Date.now() - darkPage.timeStamp >= 0) {
     res.send({dest:darkPage.destination})
   } else {res.end()}
 }); 
+
+app.get('/mainPage',(req,res)=>{res.end()}); // this is an invalid path, I just have this to prevent crashes
 
 
 app.get('/hangmanle/positions/:key/:day', (req, res) =>{
