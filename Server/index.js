@@ -209,8 +209,8 @@ threads[3].addChild(new Post("Rajkumari Carlyle", Date.parse("2024-04-20T21:53:0
 threads[3].addChild(new Post("Neil Falk",         Date.parse("2024-04-20T21:53:00"), "Hey, I've got feelings too, and I am getting better at this."));
 threads[3].addChild(new Post("Benedict Brutus",   Date.parse("2024-04-20T21:53:00"), `check this out. the pw is the first name of our founder.<br>
 <div id="pwd-entry" style="display: flex; flex-direction: column; justify-content: space-evenly; align-items: center; width: 70%;">
-  <input id="pwd-input${1}" type="text" placeholder="Password" style="font-size: 12px;">
-  <button name="button" id="pwd-submit${1}" style="font-size: 12px;">Submit</button> 
+  <input id="pwd-input${0}" type="text" placeholder="Password" style="font-size: 12px;">
+  <button name="button" id="pwd-submit${0}" style="font-size: 12px;">Submit</button> 
 </div>`));
 
 threads[3].addChild(new Post("Chloe Havener",     Date.parse("2024-04-20T21:54:00"), "yesss it finally happened"));
@@ -310,8 +310,9 @@ app.post('/forum/verify', (req, res) => {
 })
 
 app.post('/forum/pass', (req, res) => {
+  console.log(req.body)
   postPasses.forEach((post, index) => {
-    console.log(post, req.body)
+    // console.log(post, req.body)
     if((post.passHash == 0 || req.body.passHash == post.passHash) && req.body.index == index) {
       res.send({index:index, destination: post.destination});
     } else {res.end()}
