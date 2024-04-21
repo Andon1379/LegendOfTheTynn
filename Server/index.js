@@ -171,6 +171,7 @@ app.get('/forum', (req, res) => {
     threads.forEach(thread => {
         if(thread.timeStamp - Date.now() <= 0) {
             var tmpThread = new Thread(thread.threadOwner, thread.timeStamp, thread.title, thread.content, "");
+            if (thread.passhash === 0) {tmpThread.passHash = -1;}
             thread.children.forEach(e=>{
               if(e.timeStamp - Date.now() <= 0) {tmpThread.addChild(new Post(e.postAuthor, e.timeStamp, e.content))}
             })
