@@ -158,7 +158,7 @@ app.get("/forum/id/:id", (req, res)=>{
 app.post('/forum/verify', (req, res) => {
   console.log(req.body)
   threads.forEach((thread, index) =>{
-    if(req.body.passhash.toLowerCase() == thread.passhash && req.body.index == index) {
+    if(req.body.passhash == thread.passhash && req.body.index == index) {
       
       res.send({index: index, destination: thread.destination}); 
 
