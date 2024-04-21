@@ -230,7 +230,7 @@ darkPage = { pass:"creature", destination:"dark_home.html", timeStamp:Date.parse
 
 hangmanglePasswords = ["party","nabo","tamhlvf", "oetaqgctsqp", "sttwfjmfjzxzcbvwcye"];
 postPasses = [];
-postPasses[0] = ThreadPass("ernst", "www.google.com")
+postPasses[0] = new ThreadPass("ernst", "www.google.com")
 
 // helper functions
 const timeLog = (req, res, next) => {
