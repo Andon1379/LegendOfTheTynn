@@ -46,7 +46,7 @@ class Post {
 class ThreadPass {
 
   constructor(password, destination){
-    this.passHash = hashCode(password);
+    this.passhash = hashCode(password);
     this.destination = destination;
   }
 }
