@@ -222,7 +222,7 @@ threads[3].addChild(new Post("Chloe Havener",     Date.parse("2024-04-20T22:12:0
 
 
 
-darkPage = { pass:"creature", destination:"dark_home.html", timeStamp:Date.parse("23 Apr 2024 15:30:00")};
+darkPage = { pass:"creature", destination:"/dark_home.html", timeStamp:Date.parse("23 Apr 2024 15:30:00")};
 // TODO: add link from fake homepage to forum 
 
 // forum needs to be accessible monday, 
@@ -321,7 +321,7 @@ app.post('/forum/pass', (req, res) => {
 
 
 app.get('/mainPage/:pass', (req, res) => {
-  if(req.pass == darkPage.pass && Date.now() - darkPage.timeStamp >= 0) {
+  if(req.params.pass == darkPage.pass && Date.now() - darkPage.timeStamp >= 0) {
     res.send({dest:darkPage.destination})
   } else {res.end()}
 }); 
