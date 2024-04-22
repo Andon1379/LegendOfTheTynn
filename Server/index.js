@@ -44,13 +44,114 @@ class Post {
 }
 
 class ThreadPass {
-
   constructor(password, destination){
     this.passhash = hashCode(password);
     this.destination = destination;
   }
 }
 
+
+class passAttempt{
+  constructor(pass, tries = 1) {
+    this.pass = pass;
+    this.tries = tries;
+  }
+  addTries(num) {this.tries += num;}
+  addTries() {this.tries += 1;}
+  setTries(num) {this.tries = num;}
+}
+
+class passAttemptCollection{
+  constructor() {
+    this.arr = [];
+    this.mostQueriedIndex = -1;
+  }
+
+  parse(obj) {
+    this.arr = obj.arr;
+    this.mostQueriedIndex = obj.mostQueriedIndex;
+    return this
+  }
+
+  addAttempt(attempt) {
+    var modified = false
+    this.arr.forEach((ele, index) => {
+      if(ele.pass === attempt.pass) {
+        modified = true;
+        ele.tries += attempt.tries;
+      }
+    })
+    if(!modified) {this.arr.push(attempt)}
+
+    this.findMostQueried()
+  }
+
+  findMostQueried() {
+    var mostQueriedIndex__ = -1;
+    var mostQueries = -1;
+
+    this.arr.forEach((ele, index) => {
+      if(ele.tries > mostQueries) {mostQueriedIndex__ = index}
+    })
+
+    this.mostQueriedIndex = mostQueriedIndex__;
+  }
+  
+}
+
+writeStatsFile = function(file, content) { // stats.json
+  console.log(content)
+  try {
+    const data = fs.writeFile(file, JSON.stringify(content), (err)=>{
+      if (err) {console.error(err)}
+
+      console.log(`file ${file} has been written to!`);
+    });
+  } catch (err) {
+
+    console.error(err);
+  }
+}
+
+readStatsFile = function(file) { // these are async, technically
+  try {
+    fs.readFile(file, 'utf-8', (err, data) => {
+      if(err){console.error(err);}
+      console.log(file, data);
+      
+      if(data == null || data == undefined || data == '') {
+        fs.writeFile(file, JSON.stringify(new passAttemptCollection()), 'utf-8', (err)=>{
+          if (err) {console.error(err)}
+          console.log(`file ${file} has been written to!`)
+          return readStatsFile(file);
+      })};
+      
+      data = JSON.parse(data);
+      console.log(data);
+      return data;
+
+    });
+  } catch (err) {
+
+    console.error(err);
+    if (err.code == "ENOENT") {
+      fs.writeFile(file, JSON.stringify(new passAttemptCollection()), (err)=>{
+        if (err) {console.error(err)}
+        console.log(`file ${file} has been written to!`)
+        return readStatsFile(file);
+      });
+    }
+  }
+}
+
+
+readStatsFileStartup = function(file) {
+  data = JSON.parse(fs.readFileSync(file, { encoding: 'utf8', flag: 'as+' }))
+  if(data == undefined) {data = new passAttemptCollection()} else {
+    data = new passAttemptCollection().parse(data);
+  } 
+  return data
+}
 
 var hashCode = function(s) {
   console.log(s)
@@ -65,6 +166,7 @@ var hashCode = function(s) {
 const express = require('express');
 // const http = require("http");
 const cors = require('cors');
+const fs = require('fs');
 
 const app = express();
 app.use(cors());
@@ -223,17 +325,17 @@ threads[3].addChild(new Post("Chloe Havener",     Date.parse("2024-04-24T22:12:0
 
 // THURSDAY POSTS
 threads[4] = new Thread("Nikos Shen",             Date.parse("2024-04-25T12:03:00"), "So what should we be doing now?","","")
-threads[4].addChild(new Post("Jim Tibbett",       Date.parse("2024-04-25T12:05:00"), "We wait, and we’ll know when we’re ready to advance."));
+threads[4].addChild(new Post("Jim Tibbett",       Date.parse("2024-04-25T12:05:00"), "We wait, and we'll know when we're ready to advance."));
 threads[4].addChild(new Post("Benedict Brutus",   Date.parse("2024-04-25T12:06:00"), "but shoudlnt we have done enough already?"));
 threads[4].addChild(new Post("Rajkumari Carlyle", Date.parse("2024-04-25T12:08:00"), "Minor spelling mistake, point invalid."));
-threads[4].addChild(new Post("Diedre Everly",     Date.parse("2024-04-25T12:10:00"), "It’s not nice to tease like that. As for Benedict’s concerns, there does not seem to be any sign of the Tynn moving away just yet, so I’m not quite sure if we’ll have to do this all again"));
+threads[4].addChild(new Post("Diedre Everly",     Date.parse("2024-04-25T12:10:00"), "It's not nice to tease like that. As for Benedict's concerns, there does not seem to be any sign of the Tynn moving away just yet, so I'm not quite sure if we'll have to do this all again"));
 threads[4].addChild(new Post("Benedict Brutus",   Date.parse("2024-04-25T12:11:00"), "uhhhhhhhh doesnt that mean theres a way to get it to leave, id rather not any more students get involved with that thing"));
 threads[4].addChild(new Post("Nikos Shen",        Date.parse("2024-04-25T12:11:00"), "seconded"));
 threads[4].addChild(new Post("Chloe Havener",     Date.parse("2024-04-25T12:12:00"), "id doubt itd want to leave. think about how populated this campus is, and how willing we are to feed it"));
-threads[4].addChild(new Post("Rajkumari Carlyle", Date.parse("2024-04-25T12:13:00"), "Yeah, it’s probably thinking it hit the jackpot or something."));
-threads[4].addChild(new Post("Jim Tibbett",       Date.parse("2024-04-25T12:15:00"), "Enough bickering. To prevent this conversation from spiraling any further today, I’m going to pause posting for today. We are going to continue operating as we have been, and that is final. Nikos, I understand you are worried for your safety, but I assure you, as a member of the society, you will remain safe. And Benedict, other students are a small sacrifice for the safety of everyone at large."));
+threads[4].addChild(new Post("Rajkumari Carlyle", Date.parse("2024-04-25T12:13:00"), "Yeah, it's probably thinking it hit the jackpot or something."));
+threads[4].addChild(new Post("Jim Tibbett",       Date.parse("2024-04-25T12:15:00"), "Enough bickering. To prevent this conversation from spiraling any further today, I'm going to pause posting for today. We are going to continue operating as we have been, and that is final. Nikos, I understand you are worried for your safety, but I assure you, as a member of the society, you will remain safe. And Benedict, other students are a small sacrifice for the safety of everyone at large."));
 threads[4].addChild(new Post("Rajkumari Carlyle", Date.parse("2024-04-25T12:15:00"), "Minor spelling mistake."));
-threads[4].addChild(new Post("Benedict Brutus",   Date.parse("2024-04-25T12:26:00"), `Ezmmlg. Z’g klttbbuz fom ah kbhzx nbh otmy buyzfmytkyw aav Nrug. Kbhzx nbh hkv wnykvhmsr iytkbea mobj zhynd mbax rhw ixpigk. Efid. Aavlx pl ei zshis alkv. Iny Lfwblmp cl h yiunk. Pys dpweui zh dugf iviisx? Kbx jkvumbkv... C’ol wfhx tr iylltiwa. Thextf prm mox wckzm uur pg wcyar pytyl znl zafqg pmjyem. Mycl zhtcxar, kbxf’ov – qx’cx uigl mvlkpucy mobeal. Hgu zhy pyum? Ah byxw myy Mfge btwip? Nh rxvj hbkjyecxj btwip?<br>Fhvd, Z hxlw ki zlm fom. Lovlrvgv ig aazm yvklg lohlfw ahf. C’es uv uohbcuusx ki mheb, vna hefr vgty B nxk grzxcz hbm fz mobj qavev gxzl. Yykl’l kbx vgcs mobea B jte mahkv hhd. Lfgx oteafhgcyl ttby llgjy; lvfv xhu'm. Kbx vgvm motk xhu'm nces be nbtx. Gom hec nal xewkfikyw oteafhgj nhnxkbxy myyg kxtcioxi. Nal dvspvku cl “plfftabfh”. Ul myykl Yicwhr rn gpgv um ubxbm.`));
+threads[4].addChild(new Post("Benedict Brutus",   Date.parse("2024-04-25T12:26:00"), `Ezmmlg. Z'g klttbbuz fom ah kbhzx nbh otmy buyzfmytkyw aav Nrug. Kbhzx nbh hkv wnykvhmsr iytkbea mobj zhynd mbax rhw ixpigk. Efid. Aavlx pl ei zshis alkv. Iny Lfwblmp cl h yiunk. Pys dpweui zh dugf iviisx? Kbx jkvumbkv... C'ol wfhx tr iylltiwa. Thextf prm mox wckzm uur pg wcyar pytyl znl zafqg pmjyem. Mycl zhtcxar, kbxf'ov – qx'cx uigl mvlkpucy mobeal. Hgu zhy pyum? Ah byxw myy Mfge btwip? Nh rxvj hbkjyecxj btwip?<br>Fhvd, Z hxlw ki zlm fom. Lovlrvgv ig aazm yvklg lohlfw ahf. C'es uv uohbcuusx ki mheb, vna hefr vgty B nxk grzxcz hbm fz mobj qavev gxzl. Yykl'l kbx vgcs mobea B jte mahkv hhd. Lfgx oteafhgcyl ttby llgjy; lvfv xhu'm. Kbx vgvm motk xhu'm nces be nbtx. Gom hec nal xewkfikyw oteafhgj nhnxkbxy myyg kxtcioxi. Nal dvspvku cl “plfftabfh”. Ul myykl Yicwhr rn gpgv um ubxbm.`));
 threads[4].addChild(new Post("Neil Falk",         Date.parse("2024-04-25T12:28:00"), "What"));
 threads[4].addChild(new Post("Benedict Brutus",   Date.parse("2024-04-25T12:29:00"), "listen to the song from the recording last night. there's a hidden message. listen close."));
 threads[4].addChild(new Post("Neil Falk",         Date.parse("2024-04-25T12:30:00"), "Ok"));
@@ -267,11 +369,21 @@ hangmanglePasswords = ["party","nabo","tamhlvf", "oetaqgctsqp", "sttwfjmfjzxzcbv
 postPasses = [];
 postPasses[0] = new ThreadPass("ernst", "https://www.google.com")
 
+var ForumPass = readStatsFileStartup('./forumStats.json')
+console.log(ForumPass)
+
+var InlineForumPass = readStatsFileStartup('./inlineForumStats.json')
+console.log(InlineForumPass)
+
+var MainPagePass = readStatsFileStartup('./mainPageStats.json')
+console.log(MainPagePass)
+
+
 // helper functions
 const timeLog = (req, res, next) => {
     var curTime = new Date();
     let curMin = (curTime.getHours()*60)+curTime.getMinutes();
-    console.log(`[${(curMin - (curMin % 60) )/ 60}:${curMin%60}]: ${req.method} at ${req.originalUrl}`);
+    console.log(`[${(curMin - (curMin % 60) )/ 60}:${curMin%60}]: ${req.method} at ${req.originalUrl} from ${req.ip}`);
     console.log(`req.params: ${JSON.stringify(req.params)}`);
     next()
 }
@@ -335,6 +447,10 @@ app.get("/forum/id/:id", (req, res)=>{
 
 app.post('/forum/verify', (req, res) => {
   console.log(req.body)
+
+  ForumPass.addAttempt(new passAttempt(req.body.passhash))
+  writeStatsFile('./forumStats.json', ForumPass)
+
   threads.forEach((thread, index) =>{
     if((thread.passhash == 0 || req.body.passhash == thread.passhash) && req.body.index == index) {
       
@@ -346,6 +462,10 @@ app.post('/forum/verify', (req, res) => {
 
 app.post('/forum/pass', (req, res) => {
   console.log(req.body)
+
+  InlineForumPass.addAttempt(new passAttempt(req.body.passHash))
+  writeStatsFile('./inlineForumStats.json', InlineForumPass)
+  
   postPasses.forEach((post, index) => {
     // console.log(post, req.body, req.body.passHash == post.passHash)
     if((post.passHash == 0 || req.body.passHash == post.passHash) && req.body.index == index) {
@@ -356,6 +476,9 @@ app.post('/forum/pass', (req, res) => {
 
 
 app.get('/mainPage/:pass', (req, res) => {
+  MainPagePass.addAttempt(new passAttempt(req.params.pass))
+  writeStatsFile('./mainPageStats.json', MainPagePass)
+
   if(req.params.pass == darkPage.pass && Date.now() - darkPage.timeStamp >= 0) {
     res.send({dest:darkPage.destination})
   } else {res.end()}
