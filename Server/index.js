@@ -46,7 +46,7 @@ class Post {
 class ThreadPass {
 
   constructor(password, destination){
-    this.password = hashCode(password);
+    this.passHash = hashCode(password);
     this.destination = destination;
   }
 }
@@ -310,9 +310,9 @@ app.post('/forum/verify', (req, res) => {
 })
 
 app.post('/forum/pass', (req, res) => {
-  // console.log(req.body)
+  console.log(req.body)
   postPasses.forEach((post, index) => {
-    console.log(post, req.body, req.body.passHash == post.passHash)
+    // console.log(post, req.body, req.body.passHash == post.passHash)
     if((post.passHash == 0 || req.body.passHash == post.passHash) && req.body.index == index) {
       res.send({index:index, destination: post.destination});
     } else {res.end()}
