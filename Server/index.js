@@ -221,6 +221,41 @@ threads[3].addChild(new Post("Benedict Brutus",   Date.parse("2024-04-20T22:10:0
 threads[3].addChild(new Post("Chloe Havener",     Date.parse("2024-04-20T22:12:00"), "be patient lol you said that last time"));
 
 
+// THURSDAY POSTS
+threads[4] = new Thread("Nikos Shen",             Date.parse("2024-04-21T12:03:00"), "So what should we be doing now?","","")
+threads[4].addChild(new Post("Jim Tibbett",       Date.parse("2024-04-21T12:05:00"), "We wait, and we’ll know when we’re ready to advance."));
+threads[4].addChild(new Post("Benedict Brutus",   Date.parse("2024-04-21T12:06:00"), "but shoudlnt we have done enough already?"));
+threads[4].addChild(new Post("Rajkumari Carlyle", Date.parse("2024-04-21T12:08:00"), "Minor spelling mistake, point invalid."));
+threads[4].addChild(new Post("Diedre Everly",     Date.parse("2024-04-21T12:10:00"), "It’s not nice to tease like that. As for Benedict’s concerns, there does not seem to be any sign of the Tynn moving away just yet, so I’m not quite sure if we’ll have to do this all again"));
+threads[4].addChild(new Post("Benedict Brutus",   Date.parse("2024-04-21T12:11:00"), "uhhhhhhhh doesnt that mean theres a way to get it to leave, id rather not any more students get involved with that thing"));
+threads[4].addChild(new Post("Nikos Shen",        Date.parse("2024-04-21T12:11:00"), "seconded"));
+threads[4].addChild(new Post("Chloe Havener",     Date.parse("2024-04-21T12:12:00"), "id doubt itd want to leave. think about how populated this campus is, and how willing we are to feed it"));
+threads[4].addChild(new Post("Rajkumari Carlyle", Date.parse("2024-04-21T12:13:00"), "Yeah, it’s probably thinking it hit the jackpot or something."));
+threads[4].addChild(new Post("Jim Tibbett",       Date.parse("2024-04-21T12:15:00"), "Enough bickering. To prevent this conversation from spiraling any further today, I’m going to pause posting for today. We are going to continue operating as we have been, and that is final. Nikos, I understand you are worried for your safety, but I assure you, as a member of the society, you will remain safe. And Benedict, other students are a small sacrifice for the safety of everyone at large."));
+threads[4].addChild(new Post("Rajkumari Carlyle", Date.parse("2024-04-21T12:15:00"), "Minor spelling mistake."));
+threads[4].addChild(new Post("Benedict Brutus",   Date.parse("2024-04-21T12:26:00"), `Ezmmlg. Z’g klttbbuz fom ah kbhzx nbh otmy buyzfmytkyw aav Nrug. Kbhzx nbh hkv wnykvhmsr iytkbea mobj zhynd mbax rhw ixpigk. Efid. Aavlx pl ei zshis alkv. Iny Lfwblmp cl h yiunk. Pys dpweui zh dugf iviisx? Kbx jkvumbkv... C’ol wfhx tr iylltiwa. Thextf prm mox wckzm uur pg wcyar pytyl znl zafqg pmjyem. Mycl zhtcxar, kbxf’ov – qx’cx uigl mvlkpucy mobeal. Hgu zhy pyum? Ah byxw myy Mfge btwip? Nh rxvj hbkjyecxj btwip?<br>Fhvd, Z hxlw ki zlm fom. Lovlrvgv ig aazm yvklg lohlfw ahf. C’es uv uohbcuusx ki mheb, vna hefr vgty B nxk grzxcz hbm fz mobj qavev gxzl. Yykl’l kbx vgcs mobea B jte mahkv hhd. Lfgx oteafhgcyl ttby llgjy; lvfv xhu'm. Kbx vgvm motk xhu'm nces be nbtx. Gom hec nal xewkfikyw oteafhgj nhnxkbxy myyg kxtcioxi. Nal dvspvku cl “plfftabfh”. Ul myykl Yicwhr rn gpgv um ubxbm.`));
+threads[4].addChild(new Post("Neil Falk",         Date.parse("2024-04-21T12:28:00"), "What"));
+threads[4].addChild(new Post("Benedict Brutus",   Date.parse("2024-04-21T12:29:00"), "listen to the song from the recording last night. there's a hidden message. listen close."));
+threads[4].addChild(new Post("Neil Falk",         Date.parse("2024-04-21T12:30:00"), "Ok"));
+threads[4].addChild(new Post("Diedre Everly",     Date.parse("2024-04-21T12:30:00"), "Ben, what have you done? This isn't a game!"));
+threads[4].addChild(new Post("Nikos Shen",        Date.parse("2024-04-21T12:31:00"), "is he serious? what's going on?"));
+threads[4].addChild(new Post("Jim Tibbett",       Date.parse("2024-04-21T12:33:00"), "Order, everyone. We need to assess this calmly. Benedict, we should talk."));
+threads[4].addChild(new Post("Ananta Dimov",      Date.parse("2024-04-21T12:40:00"), "Are we supposed to just carry on after this bombshell?"));
+threads[4].addChild(new Post("Chloe Havener",     Date.parse("2024-04-21T12:42:00"), "hold up, this is a lot to take in. always knew there was more to this than we saw"));
+threads[4].addChild(new Post("Diedre Everly",     Date.parse("2024-04-21T12:43:00"), "We need a moment to digest this. Maybe stepping back is wise"));
+threads[4].addChild(new Post("Benedict Brutus",   Date.parse("2024-04-21T12:45:00"), "I said my piece. The truth needed to come out."));
+threads[4].addChild(new Post("Nikos Shen",        Date.parse("2024-04-21T12:45:00"), "Does this mean the danger's real? Or have we been misled?"));
+threads[4].addChild(new Post("Chloe Havener",     Date.parse("2024-04-21T12:50:00"), "misled? more like we've been in the dark this whole time"));
+threads[4].addChild(new Post("Ananta Dimov",      Date.parse("2024-04-21T12:51:00"), "The clues, the puzzles. Were they all just a smokescreen?"));
+threads[4].addChild(new Post("Jim Tibbett",       Date.parse("2024-04-21T12:52:00"), "We remain united in purpose. Let's not lose sight of that. We will address this properly."));
+threads[4].addChild(new Post("Diedre Everly",     Date.parse("2024-04-21T12:52:00"), "We need to think about what's best for all of us now. Perhaps a little quiet can help us find clarity"));
+threads[4].addChild(new Post("Rajkumari Carlyle", Date.parse("2024-04-21T12:52:00"), "Yeah, quiet. Maybe too quiet. We're all here because we chose to be, right? Right??"));
+threads[4].addChild(new Post("Neil Falk",         Date.parse("2024-04-21T13:01:00"), "Feeling quite lost, to be honest. I need some time to think about all of this."));
+threads[4].addChild(new Post("Chloe Havener",     Date.parse("2024-04-21T13:03:00"), "we all do, neil. we all do"));
+
+// FRIDAY POSTS
+threads[5] = new Thread("Jim Tibbett", Date.parse("2024-04-21T8:00:00"), "I believe it would be wise to close this thread for now so no more information is leaked. I apologize to my fellow members. Unfortunately, after what happened yesterday, it will be best to restrict use for now.", "", "")
+
 
 darkPage = { pass:"creature", destination:"/dark_home.html", timeStamp:Date.parse("23 Apr 2024 15:30:00")};
 // TODO: add link from fake homepage to forum 
