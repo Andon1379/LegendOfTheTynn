@@ -359,7 +359,7 @@ threads[4].addChild(new Post("Chloe Havener",     Date.parse("2024-04-25T13:03:0
 threads[5] = new Thread("Jim Tibbett", Date.parse("2024-04-26T8:00:00"), "I believe it would be wise to close this thread for now so no more information is leaked. I apologize to my fellow members. Unfortunately, after what happened yesterday, it will be best to restrict use for now.", "", "")
 
 
-darkPage = { pass:"creature", destination:"/dark_home.html", timeStamp:Date("2024 3 23 15:30:00")};
+darkPage = { pass:"creature", destination:"/dark_home.html", timeStamp:new Date("2024 3 23 15:30:00")};
 // TODO: add link from fake homepage to forum 
 
 // forum needs to be accessible monday, 
@@ -485,7 +485,7 @@ app.get('/mainPage/:pass', (req, res) => {
   MainPagePass.addAttempt(new passAttempt(req.params.pass))
   writeStatsFile('./mainPageStats.json', MainPagePass)
 
-  if(req.params.pass == darkPage.pass && Date.now() - darkPage.timeStamp >= 0) {
+  if(req.params.pass == darkPage.pass && darkPage.timeStamp <= new Date()) {
     res.send({dest:darkPage.destination})
   } else {res.end()}
 }); 
