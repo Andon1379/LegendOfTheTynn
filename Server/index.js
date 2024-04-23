@@ -391,15 +391,21 @@ const timeLog = (req, res, next) => {
 
 
 function parseDate(day) { // for hangmangle passwords. day should be in dd-mm-yyyy format (w/ or w/o leading 0s)
+  day1 = new Date(2024, 3, 22);
   day = day.split('_');
-  day = Date.parse(`${day[2]}-${day[1]}-${day[0]}`) - Date.parse("22 Apr 2024") // monday
+  day = new Date(`${day[2]} ${day[1]} ${day[0]} 00:00:00`) // monday
   
   // prevent players from getting past today
   today = new Date()
-  today = Date.parse(`${today.getFullYear()}-${today.getMonth()}-${today.getDate()}`) - Date.parse("22 Apr 2024") 
+  today = new Date(today.getFullYear(), today.getMonth(), today.getDate()) 
+  console.log(day, today)
+  // console.log(day -day1, today-day1)
+  day = day - day1
+  today = today - day1 
   day = Math.min(day, today)
-  day = Math.round(day / (1000 * 3600 * 24)) - 1 // normalize for index
-  
+  day = day / (1000 * 3600 * 24) // normalize for index
+
+  // console.log(day)
   if(day < 0) {day = 0} else if (day > 4) {day = 4}
   console.log(`day: ${day}`);
   return day  	
@@ -511,14 +517,14 @@ app.get('/hangmanle/length/:day', (req, res) =>{
 
 app.get('/hangmanle/canNext/:day',(req, res) => {
   console.log("accessed next")
-  startDay = Date.parse("22 Apr 2024")
+  startDay = new Date(2024, 3, 22)
   var day = req.params["day"];
   day = day.split('_');
-  day = Date.parse(`${day[2]}-${day[1]}-${day[0]}`) - startDay
+  day = new Date(`${day[2]} ${day[1]} ${day[0]} 00:00:00`) - startDay
   
   var today = new Date()
-  today = Date.parse(`${today.getFullYear()}-${today.getMonth()}-${today.getDate()}`) - startDay 
-
+  today = new Date(today.getFullYear(), today.getMonth(), today.getDate()) - startDay
+  
   console.log(`day: ${day}, today: ${today}`)
 
   resp = {next:false, prev:false}
