@@ -530,8 +530,9 @@ app.get('/hangmanle/canNext/:day',(req, res) => {
   resp = {next:false, prev:false}
   
   if(day < 0 ) {resp.next = true; resp.prev = false;}  
-  else if(day > today) {resp.next = false; resp.prev = true;}
-  else if(day === 0) {resp.next = false; resp.prev = false;}
+  else if(day >= today) {resp.next = false; resp.prev = true;}
+  else if(day < today) {resp.next = true;}
+  else if(day === 0) {resp.next = true; resp.prev = false;}
   res.send(resp);
   
 })
