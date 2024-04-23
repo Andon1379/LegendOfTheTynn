@@ -396,7 +396,7 @@ function parseDate(day) { // for hangmangle passwords. day should be in dd-mm-yy
   
   // prevent players from getting past today
   today = new Date()
-  today = Date.parse(`${today.getFullYear()}-${today.getMonth()}-${today.getDate()}`)
+  today = Date.parse(`${today.getFullYear()}-${today.getMonth()}-${today.getDate()}`) - Date.parse("22 Apr 2024") 
   day = Math.min(day, today)
   day = Math.round(day / (1000 * 3600 * 24)) - 1 // normalize for index
   
@@ -516,7 +516,7 @@ app.get('/hangmanle/canNext/:day',(req, res) => {
   day = Date.parse(`${day[2]}-${day[1]}-${day[0]}`) - Date.parse("22 Apr 2024")
   
   var today = new Date()
-  today = Date.parse(`${today.getFullYear()}-${today.getMonth()}-${today.getDate()}`)
+  today = Date.parse(`${today.getFullYear()}-${today.getMonth()}-${today.getDate()}`) - Date.parse("22 Apr 2024") 
   
   resp = {next:false, prev:false}
   
