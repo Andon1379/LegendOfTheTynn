@@ -401,7 +401,7 @@ function parseDate(day) { // for hangmangle passwords. day should be in dd-mm-yy
   day = Math.round(day / (1000 * 3600 * 24)) - 1 // normalize for index
   
   if(day < 0) {day = 0} else if (day > 4) {day = 4}
-  console.log(day);
+  console.log(`day: ${day}`);
   return day  	
 }
 
@@ -511,13 +511,16 @@ app.get('/hangmanle/length/:day', (req, res) =>{
 
 app.get('/hangmanle/canNext/:day',(req, res) => {
   console.log("accessed next")
+  startDay = Date.parse("22 Apr 2024")
   var day = req.params["day"];
   day = day.split('_');
-  day = Date.parse(`${day[2]}-${day[1]}-${day[0]}`) - Date.parse("22 Apr 2024")
+  day = Date.parse(`${day[2]}-${day[1]}-${day[0]}`) - startDay
   
   var today = new Date()
-  today = Date.parse(`${today.getFullYear()}-${today.getMonth()}-${today.getDate()}`) - Date.parse("22 Apr 2024") 
-  
+  today = Date.parse(`${today.getFullYear()}-${today.getMonth()}-${today.getDate()}`) - startDay 
+
+  console.log(`day: ${day}, today: ${today}`)
+
   resp = {next:false, prev:false}
   
   if(day < 0 ) {resp.next = true; resp.prev = false;}  
