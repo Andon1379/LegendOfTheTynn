@@ -91,7 +91,7 @@ class passAttemptCollection{
     var mostQueries = -1;
 
     this.arr.forEach((ele, index) => {
-      if(ele.tries > mostQueries) {mostQueriedIndex__ = index}
+      if(ele.tries >= mostQueries) {mostQueriedIndex__ = index}
     })
 
     this.mostQueriedIndex = mostQueriedIndex__;
