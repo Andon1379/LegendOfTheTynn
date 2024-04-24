@@ -19,6 +19,9 @@ def decrypt(input:str, key:str):
     ans = ""
     
     for i in range(len(input)):
+        if(input[i] == " "): 
+            ans += " "
+            continue
         ans += chr((ord(input[i]) - ord(key[i%key_len]))%26 + unicode_offset)
         
     return ans
