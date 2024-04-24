@@ -284,7 +284,7 @@ And your hint:<br>
 <br>
 Good luck, new members!<br>
 <br>
-And remember: the New Member's Beverage is to be ordered and imbibed Tuesday through Friday, 4 to 5 P.M. E.S.T. ONLY. Induction can only begin if the drink is finished in front of an employee. Following instructions is a valuable skill for any prospective Tynn Society member. For your own safety, attempt to minimize the number of sips or gulps taken when consuming the New Member's Beverage. Good luck!`, "");
+And remember: the New Member's Beverage is to be ordered and imbibed Tuesday through Wednesday, 4 to 5 P.M. E.S.T. ONLY. Induction can only begin if the drink is finished in front of an employee. Following instructions is a valuable skill for any prospective Tynn Society member. For your own safety, attempt to minimize the number of sips or gulps taken when consuming the New Member's Beverage. Good luck!`, "");
 threads[2].addChild(new Post("Nikos Shen",        Date.parse("2024-04-23T11:12:00"), "LMAO this hangmanle makes no sense. Who wrote this???"));
 threads[2].addChild(new Post("Jim Tibbett",       Date.parse("2024-04-23T11:16:00"), "Nikos, we've told you how to solve these already. Does Vigenère ring a bell to you?"));
 threads[2].addChild(new Post("Ananta Dimov",      Date.parse("2024-04-23T11:20:00"), "Now that's my bread and butter. I wish I had a hangmanle like this."));
