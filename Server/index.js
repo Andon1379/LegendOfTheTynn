@@ -474,12 +474,12 @@ app.post('/forum/verify', (req, res) => {
 app.post('/forum/pass', (req, res) => {
   console.log(req.body)
 
-  InlineForumPass.addAttempt(new passAttempt(req.body.passHash))
+  InlineForumPass.addAttempt(new passAttempt(req.body.passhash))
   writeStatsFile('./inlineForumStats.json', InlineForumPass)
   
   postPasses.forEach((post, index) => {
     // console.log(post, req.body, req.body.passHash == post.passHash)
-    if((post.passHash == 0 || req.body.passHash == post.passHash) && req.body.index == index) {
+    if((post.passhash == 0 || req.body.passhash == post.passhash) && req.body.index == index) {
       res.send({index:index, destination: post.destination});
     } else {res.end()}
   })
