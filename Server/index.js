@@ -372,7 +372,7 @@ darkPage = { pass:"creature", destination:"/dark_home.html", timeStamp:new Date(
 
 hangmanglePasswords = ["party","nabo","tamhlvf", "oetaqgctsqp", "sttwfjmfjzxzcbvwcye"];
 postPasses = [];
-postPasses[0] = new ThreadPass("ernst", "https://www.youtube.com/watch?v=v04D84_II6M")
+postPasses[0] = new ThreadPass("ernst", "https://youtu.be/v04D84_II6M?si=3N9fXxjLZFEzmhmN")
 
 var ForumPass = readStatsFileStartup('./forumStats.json')
 console.log(ForumPass)
